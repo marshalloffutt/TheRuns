@@ -13,5 +13,35 @@ namespace TheRuns.Controllers
         {
             _runService = runService;
         }
+
+        [HttpGet]
+        public RunDetails[] GetUserRuns(Guid userId)
+        {
+            return _runService.GetUserRuns(userId);
+        }
+
+        [HttpGet]
+        public RunDetails GetRunDetails(int id)
+        {
+            return _runService.GetRunDetails(id);
+        }
+
+        [HttpPost]
+        public RunDetails CreateRun(RunDetails run)
+        {
+            return _runService.CreateRun(run);
+        }
+
+        [HttpPut]
+        public RunDetails UpdateRun(RunDetails run)
+        {
+            return _runService.UpdateRun(run);
+        }
+
+        [HttpDelete]
+        public void DeleteRun(int id)
+        {
+            _runService.DeleteRun(id);
+        }
     }
 }
