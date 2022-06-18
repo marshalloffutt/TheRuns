@@ -10,10 +10,29 @@ namespace TheRuns.Services
             //connect to db
         }
 
+        public List<RunDetails> GetUserRuns(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public RunDetails GetRunDetails(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public RunDetails CreateRun(RunDetails run)
         {
-            //add to db
-            return new RunDetails();
+            throw new NotImplementedException();
+        }
+
+        public RunDetails UpdateRun(RunDetails run)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteRun(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
