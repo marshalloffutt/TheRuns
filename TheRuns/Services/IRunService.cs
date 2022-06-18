@@ -2,18 +2,8 @@
 
 namespace TheRuns.Services
 {
-    public class RunService : IRunService
+    public interface IRunService
     {
-
-        public RunService()
-        {
-            //connect to db
-        }
-
-        public RunDetails CreateRun (RunDetails run)
-        {
-            //add to db
-            return new RunDetails();
-        }
+        RunDetails CreateRun(RunDetails run);
     }
 }
