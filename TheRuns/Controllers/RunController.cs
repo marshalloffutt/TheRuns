@@ -15,7 +15,7 @@ namespace TheRuns.Controllers
         }
 
         [HttpGet]
-        public RunDetails[] GetUserRuns(Guid userId)
+        public List<RunDetails> GetUserRuns(Guid userId)
         {
             return _runService.GetUserRuns(userId);
         }
