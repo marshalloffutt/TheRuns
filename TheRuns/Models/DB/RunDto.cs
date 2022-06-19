@@ -1,9 +1,16 @@
-﻿namespace TheRuns.Models
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace TheRuns.Models.DB
 {
-    public class RunDetails
+    public class RunDto
     {
-        public int Id { get; set; }
+        [BsonId]
+        [BsonElement(elementName: "_id")]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
         public RunType RunType { get; set; }
+        [BsonGuidRepresentation(GuidRepresentation.Standard)]
         public Guid UserId { get; set; }
         public DateTime DateOfRun { get; set; }
         public decimal DistanceInMiles { get; set; }
