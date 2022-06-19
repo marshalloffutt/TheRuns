@@ -1,13 +1,20 @@
-﻿using TheRuns.Models;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using TheRuns.Models;
+using TheRuns.Models.DB;
+using TheRuns.Services.Utils;
 
 namespace TheRuns.Services
 {
     public class RunService : IRunService
     {
+        private readonly IMongoCollection<RunDto> runs;
 
-        public RunService()
+        public RunService(IRunDatabaseSettings settings)
         {
-            //connect to db
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+            runs = database.GetCollection<RunDto>(settings.RunsCollectionName);
         }
 
         public List<RunDetails> GetUserRuns(Guid userId)
@@ -15,14 +22,17 @@ namespace TheRuns.Services
             throw new NotImplementedException();
         }
 
-        public RunDetails GetRunDetails(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //public RunDetails GetRunDetails(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public RunDetails CreateRun(RunDetails run)
+        public string CreateRun(RunDetails runDetails)
         {
-            throw new NotImplementedException();
+            var newRun = RunServiceUtils.MapToDto(runDetails);
+            runs.InsertOne(newRun);
+            var id = newRun.Id;
+            return id;
         }
 
         public RunDetails UpdateRun(RunDetails run)

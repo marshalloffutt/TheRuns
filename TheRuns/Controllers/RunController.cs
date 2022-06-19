@@ -20,14 +20,14 @@ namespace TheRuns.Controllers
             return _runService.GetUserRuns(userId);
         }
 
-        [HttpGet]
-        public RunDetails GetRunDetails(int id)
-        {
-            return _runService.GetRunDetails(id);
-        }
+        //[HttpGet]
+        //public RunDetails GetRunDetails(int id)
+        //{
+        //    return _runService.GetRunDetails(id);
+        //}
 
         [HttpPost]
-        public RunDetails CreateRun(RunDetails run)
+        public string CreateRun(RunDetails run)
         {
             return _runService.CreateRun(run);
         }
