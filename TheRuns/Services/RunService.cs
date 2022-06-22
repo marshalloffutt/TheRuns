@@ -19,13 +19,10 @@ namespace TheRuns.Services
 
         public List<RunDetails> GetUserRuns(Guid userId)
         {
-            throw new NotImplementedException();
+            var runList = runs.Find(r => r.UserId == userId).ToList();
+            var runDetailsList = RunServiceUtils.MapToRunDetailsList(runList);
+            return runDetailsList;
         }
-
-        //public RunDetails GetRunDetails(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public string CreateRun(RunDetails runDetails)
         {
@@ -35,14 +32,21 @@ namespace TheRuns.Services
             return id;
         }
 
-        public RunDetails UpdateRun(RunDetails run)
+        public void UpdateRun(RunDetails run)
         {
-            throw new NotImplementedException();
+            var runIdDb = runs.Find(r => r.Id == run.Id.ToString()).SingleOrDefault().Id;
+            var runToInsert = RunServiceUtils.MapToDto(run);
+            runToInsert.Id = runIdDb;
+            runs.ReplaceOne(r => r.Id == runIdDb, runToInsert);
         }
 
         public void DeleteRun(int id)
         {
-            throw new NotImplementedException();
+            var runToDelete = runs.Find(r => r.Id == id.ToString()).FirstOrDefault();
+            if (runs != null)
+            {
+                runs.DeleteOne(r => r.Id == runToDelete.Id);
+            }
         }
     }
 }
