@@ -19,7 +19,9 @@ namespace TheRuns.Services
 
         public List<RunDetails> GetUserRuns(Guid userId)
         {
-            throw new NotImplementedException();
+            var runList = runs.Find(r => r.UserId == userId).ToList();
+            var runDetailsList = RunServiceUtils.MapToRunDetailsList(runList);
+            return runDetailsList;
         }
 
         //public RunDetails GetRunDetails(int id)
