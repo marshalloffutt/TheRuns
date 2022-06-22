@@ -27,9 +27,9 @@ namespace TheRuns.Controllers
         }
 
         [HttpPut("{id}")]
-        public RunDetails UpdateRun([FromBody] RunDetails run)
+        public void UpdateRun([FromBody] RunDetails run)
         {
-            return _runService.UpdateRun(run);
+            _runService.UpdateRun(run);
         }
 
         [HttpDelete("{id}")]
