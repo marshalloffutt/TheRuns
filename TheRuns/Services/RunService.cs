@@ -36,15 +36,15 @@ namespace TheRuns.Services
         public void UpdateRun(UpdateRunRequest runRequest)
         {
             var runToUpdateId = runs.Find(run => run.Id == runRequest.StringId).SingleOrDefault().Id;
-            var runToInsert = RunServiceUtils.UpdateRunDto(runRequest);
-            runToInsert.Id = runToUpdateId;
-            runs.ReplaceOne(r => r.Id == runToUpdateId, runToInsert);
+            var runToReplace = RunServiceUtils.UpdateRunDto(runRequest);
+            runToReplace.Id = runToUpdateId;
+            runs.ReplaceOne(r => r.Id == runToUpdateId, runToReplace);
         }
 
         public void DeleteRun(string id)
         {
             var runToDelete = runs.Find(r => r.Id == id).FirstOrDefault();
-            if (runs != null)
+            if (runToDelete != null)
             {
                 runs.DeleteOne(r => r.Id == runToDelete.Id);
             }

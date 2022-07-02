@@ -27,7 +27,7 @@ namespace TheRuns.Controllers
         }
 
         [HttpPut]
-        public void UpdateUser(UserDetails user)
+        public void UpdateUser(UpdateUserRequest user)
         {
             _userService.UpdateUser(user);
         }

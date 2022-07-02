@@ -6,7 +6,7 @@ namespace TheRuns.Services
     {
         UserDetails GetUser(string id);
         string CreateUser(CreateUserRequest user);
-        void UpdateUser(UserDetails user);
+        void UpdateUser(UpdateUserRequest user);
         void DeleteUser(string id);
     }
 }
