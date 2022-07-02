@@ -70,11 +70,12 @@ namespace TheRuns.Services.Utils
             return runDetailsList;
         }
 
-        private static TimeSpan CalculatePace(double distance, string time)
+        private static TimeSpan CalculatePace(double distance, string duration)
         {
-            double v = distance / TimeSpan.Parse(time).TotalSeconds;
-            TimeSpan pace = TimeSpan.FromSeconds(v);
-            return pace;
+            TimeSpan time = TimeSpan.Parse(duration);
+            double velocity = time.TotalSeconds / distance;
+            var convertedPace = TimeSpan.FromSeconds(velocity);
+            return convertedPace;
         }
     }
 }
