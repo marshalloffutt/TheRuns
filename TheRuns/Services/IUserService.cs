@@ -4,9 +4,9 @@ namespace TheRuns.Services
 {
     public interface IUserService
     {
-        User GetUser(Guid id);
-        User CreateUser(User user);
-        User UpdateUser(User user);
-        void DeleteUser(Guid id);
+        UserDetails GetUser(string id);
+        string CreateUser(CreateUserRequest user);
+        void UpdateUser(UserDetails user);
+        void DeleteUser(string id);
     }
 }

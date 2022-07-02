@@ -10,22 +10,22 @@ namespace TheRuns.Services
             //connect to db
         }
 
-        public User GetUser(Guid id)
+        public UserDetails GetUser(string id)
         {
             throw new NotImplementedException();
         }
 
-        public User CreateUser(User user)
+        public string CreateUser(CreateUserRequest user)
         {
             throw new NotImplementedException();
         }
 
-        public User UpdateUser(User user)
+        public void UpdateUser(UserDetails user)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteUser(Guid id)
+        public void DeleteUser(string id)
         {
             throw new NotImplementedException();
         }

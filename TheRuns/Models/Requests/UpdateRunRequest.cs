@@ -1,7 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace TheRuns.Models.Requests
+﻿namespace TheRuns.Models.Requests
 {
     public class UpdateRunRequest
     {

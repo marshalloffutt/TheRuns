@@ -12,17 +12,17 @@ builder.Services.AddControllers();
 builder.Services.Configure<RunDatabaseSettings>(
                 builder.Configuration.GetSection(nameof(RunDatabaseSettings)));
 
-//builder.Services.Configure<UserDatabaseSettings>(
-//                builder.Configuration.GetSection(nameof(UserDatabaseSettings)));
+builder.Services.Configure<UserDatabaseSettings>(
+                builder.Configuration.GetSection(nameof(UserDatabaseSettings)));
 
 builder.Services.AddSingleton<IRunDatabaseSettings>(sp =>
     sp.GetRequiredService<IOptions<RunDatabaseSettings>>().Value);
 
-//builder.Services.AddSingleton<IUserDatabaseSettings>(sp =>
-//    sp.GetRequiredService<IOptions<UserDatabaseSettings>>().Value);
+builder.Services.AddSingleton<IUserDatabaseSettings>(sp =>
+    sp.GetRequiredService<IOptions<UserDatabaseSettings>>().Value);
 
 builder.Services.AddScoped<IRunService, RunService>();
-//builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
