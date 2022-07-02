@@ -14,28 +14,28 @@ namespace TheRuns.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        public User GetUser(Guid id)
+        [HttpGet("id")]
+        public UserDetails GetUser(string id)
         {
             return _userService.GetUser(id);
         }
 
         [HttpPost]
-        public User CreateUser(User user)
+        public string CreateUser(CreateUserRequest user)
         {
             return _userService.CreateUser(user);
         }
 
         [HttpPut]
-        public User UpdateUser(User user)
+        public void UpdateUser(UpdateUserRequest user)
         {
-            return _userService.UpdateUser(user);
+            _userService.UpdateUser(user);
         }
 
         [HttpDelete]
-        public void DeleteUser(Guid userId)
+        public void DeleteUser(string id)
         {
-            _userService.DeleteUser(userId);
+            _userService.DeleteUser(id);
         }
     }
 }
