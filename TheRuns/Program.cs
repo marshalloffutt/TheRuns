@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using TheRuns.Models;
 using TheRuns.Services;
 
@@ -23,19 +24,29 @@ builder.Services.AddSingleton<IRunDatabaseSettings>(sp =>
 builder.Services.AddScoped<IRunService, RunService>();
 //builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v3.22.1", new OpenApiInfo { Title = "The Runs", Version = "v3.22.1" });
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(o =>
+    {
+        //o.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        //o.SwaggerEndpoint("/swagger/v2/swagger.json", "v2");
+        o.SwaggerEndpoint("/swagger/v3.22.1/swagger.json", "v3.22.1");
+    });
+}
+
 if (!app.Environment.IsDevelopment())
 {
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-} else
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
