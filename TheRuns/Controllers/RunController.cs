@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TheRuns.Models;
+using TheRuns.Models.Requests;
 using TheRuns.Services;
 
 namespace TheRuns.Controllers
@@ -21,13 +22,13 @@ namespace TheRuns.Controllers
         }
 
         [HttpPost]
-        public string CreateRun([FromBody] RunDetails run)
+        public string CreateRun([FromBody] CreateRunRequest run)
         {
             return _runService.CreateRun(run);
         }
 
         [HttpPut("{id}")]
-        public void UpdateRun([FromBody] RunDetails run)
+        public void UpdateRun([FromBody] UpdateRunRequest run)
         {
             _runService.UpdateRun(run);
         }

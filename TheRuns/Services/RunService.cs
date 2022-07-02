@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using TheRuns.Models;
 using TheRuns.Models.DB;
+using TheRuns.Models.Requests;
 using TheRuns.Services.Utils;
 
 namespace TheRuns.Services
@@ -24,18 +25,18 @@ namespace TheRuns.Services
             return runDetailsList;
         }
 
-        public string CreateRun(RunDetails runDetails)
+        public string CreateRun(CreateRunRequest run)
         {
-            var newRun = RunServiceUtils.MapToDto(runDetails);
+            var newRun = RunServiceUtils.CreateRunDto(run);
             runs.InsertOne(newRun);
             var id = newRun.Id;
             return id;
         }
 
-        public void UpdateRun(RunDetails run)
+        public void UpdateRun(UpdateRunRequest run)
         {
             var runIdDb = runs.Find(r => r.Id == run.Id.ToString()).SingleOrDefault().Id;
-            var runToInsert = RunServiceUtils.MapToDto(run);
+            var runToInsert = RunServiceUtils.UpdateRunDto(run);
             runToInsert.Id = runIdDb;
             runs.ReplaceOne(r => r.Id == runIdDb, runToInsert);
         }

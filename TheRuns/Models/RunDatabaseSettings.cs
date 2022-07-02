@@ -1,15 +1,15 @@
 ﻿namespace TheRuns.Models
 {
-	public class UserDatabaseSettings : IUserDatabaseSettings
+	public class RunDatabaseSettings : IRunDatabaseSettings
 	{
-		public string UsersCollectionName { get; set; }
+		public string RunsCollectionName { get; set; }
 		public string ConnectionString { get; set; }
 		public string DatabaseName { get; set; }
 	}
 
-	public interface IUserDatabaseSettings
+	public interface IRunDatabaseSettings
 	{
-		string UsersCollectionName { get; set; }
+		string RunsCollectionName { get; set; }
 		string ConnectionString { get; set; }
 		string DatabaseName { get; set; }
 	}

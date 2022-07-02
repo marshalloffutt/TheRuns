@@ -1,20 +1,40 @@
 ﻿using TheRuns.Models;
 using TheRuns.Models.DB;
+using TheRuns.Models.Requests;
 
 namespace TheRuns.Services.Utils
 {
     static class RunServiceUtils
     {
-        public static RunDto MapToDto(RunDetails run)
+        public static RunDto CreateRunDto(CreateRunRequest run)
         {
+            var pace = CalculatePace(run.DistanceInMiles, run.Duration);
+
             var request = new RunDto()
             {
-                RunType = run.RunType,
                 UserId = run.UserId,
                 DateOfRun = run.DateOfRun,
                 DistanceInMiles = run.DistanceInMiles,
-                RunDuration = run.RunDuration,
-                MinutesPerMile = run.MinutesPerMile,
+                RunDuration = TimeSpan.Parse(run.Duration),
+                AveragePacePerMile = pace,
+                Notes = run.Notes,
+            };
+
+            return request;
+        }
+
+        public static RunDto UpdateRunDto(UpdateRunRequest run)
+        {
+            var pace = CalculatePace(run.DistanceInMiles, run.Duration);
+
+            var request = new RunDto()
+            {
+                Id = run.Id.ToString(),
+                UserId = run.UserId,
+                DateOfRun = run.DateOfRun,
+                DistanceInMiles = run.DistanceInMiles,
+                RunDuration = TimeSpan.Parse(run.Duration),
+                AveragePacePerMile = pace,
                 Notes = run.Notes,
             };
 
@@ -25,12 +45,12 @@ namespace TheRuns.Services.Utils
         {
             var runDetails = new RunDetails()
             {
-                RunType = run.RunType,
+                Id = Int32.Parse(run.Id),
                 UserId = run.UserId,
                 DateOfRun = run.DateOfRun,
                 DistanceInMiles = run.DistanceInMiles,
                 RunDuration = run.RunDuration,
-                MinutesPerMile = run.MinutesPerMile,
+                AveragePacePerMile = run.AveragePacePerMile,
                 Notes = run.Notes,
             };
 
@@ -48,6 +68,13 @@ namespace TheRuns.Services.Utils
             };
 
             return runDetailsList;
+        }
+
+        private static TimeSpan CalculatePace(double distance, string time)
+        {
+            double v = distance / TimeSpan.Parse(time).TotalSeconds;
+            TimeSpan pace = TimeSpan.FromSeconds(v);
+            return pace;
         }
     }
 }
