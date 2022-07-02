@@ -29,7 +29,7 @@ namespace TheRuns.Services.Utils
 
             var request = new RunDto()
             {
-                Id = run.Id.ToString(),
+                Id = run.StringId,
                 UserId = run.UserId,
                 DateOfRun = run.DateOfRun,
                 DistanceInMiles = run.DistanceInMiles,
@@ -45,7 +45,7 @@ namespace TheRuns.Services.Utils
         {
             var runDetails = new RunDetails()
             {
-                Id = Int32.Parse(run.Id),
+                Id = run.Id,
                 UserId = run.UserId,
                 DateOfRun = run.DateOfRun,
                 DistanceInMiles = run.DistanceInMiles,
@@ -73,8 +73,8 @@ namespace TheRuns.Services.Utils
         private static TimeSpan CalculatePace(double distance, string duration)
         {
             TimeSpan time = TimeSpan.Parse(duration);
-            double velocity = time.TotalSeconds / distance;
-            var convertedPace = TimeSpan.FromSeconds(velocity);
+            double pace = time.TotalSeconds / distance;
+            TimeSpan convertedPace = TimeSpan.FromSeconds(pace);
             return convertedPace;
         }
     }

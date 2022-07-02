@@ -9,8 +9,7 @@ namespace TheRuns.Models.DB
         [BsonElement(elementName: "_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        [BsonGuidRepresentation(GuidRepresentation.Standard)]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public DateTime DateOfRun { get; set; }
         public double DistanceInMiles { get; set; }
         public TimeSpan RunDuration { get; set; }

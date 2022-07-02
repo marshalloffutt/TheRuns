@@ -18,7 +18,7 @@ namespace TheRuns.Services
             runs = database.GetCollection<RunDto>(settings.RunsCollectionName);
         }
 
-        public List<RunDetails> GetUserRuns(Guid userId)
+        public List<RunDetails> GetUserRuns(string userId)
         {
             var runList = runs.Find(r => r.UserId == userId).ToList();
             var runDetailsList = RunServiceUtils.MapToRunDetailsList(runList);
@@ -33,17 +33,17 @@ namespace TheRuns.Services
             return id;
         }
 
-        public void UpdateRun(UpdateRunRequest run)
+        public void UpdateRun(UpdateRunRequest runRequest)
         {
-            var runIdDb = runs.Find(r => r.Id == run.Id.ToString()).SingleOrDefault().Id;
-            var runToInsert = RunServiceUtils.UpdateRunDto(run);
-            runToInsert.Id = runIdDb;
-            runs.ReplaceOne(r => r.Id == runIdDb, runToInsert);
+            var runToUpdateId = runs.Find(run => run.Id == runRequest.StringId).SingleOrDefault().Id;
+            var runToInsert = RunServiceUtils.UpdateRunDto(runRequest);
+            runToInsert.Id = runToUpdateId;
+            runs.ReplaceOne(r => r.Id == runToUpdateId, runToInsert);
         }
 
-        public void DeleteRun(int id)
+        public void DeleteRun(string id)
         {
-            var runToDelete = runs.Find(r => r.Id == id.ToString()).FirstOrDefault();
+            var runToDelete = runs.Find(r => r.Id == id).FirstOrDefault();
             if (runs != null)
             {
                 runs.DeleteOne(r => r.Id == runToDelete.Id);
