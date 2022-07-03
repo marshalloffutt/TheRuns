@@ -1,17 +1,12 @@
-import React, { Component } from "react";
-import { Button, Typography } from "@mui/material";
+import React from "react";
+import { Button } from "@mui/material";
+import { Navbar } from "../components/Navbar/Navbar";
 
-export default class App extends Component {
-  static displayName = App.name;
-
-  render() {
-    return (
-      <div className="App">
-        <Typography variant="h1" component="h2">
-          Inside App Component
-        </Typography>
-        <Button variant="outlined">I am a button</Button>
-      </div>
-    );
-  }
+export default function App() {
+  return (
+    <div className="App">
+      <Navbar />
+      <Button variant="outlined">I am a button</Button>
+    </div>
+  );
 }
