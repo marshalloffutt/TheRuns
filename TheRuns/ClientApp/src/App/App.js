@@ -1,22 +1,17 @@
 import React, { Component } from "react";
-import { Route } from "react-router";
-import { Layout } from "../components/Layout";
-import { Home } from "../components/Home";
-import { FetchData } from "../components/FetchData";
-import { Counter } from "../components/Counter";
-
-import "./App.scss";
+import { Button, Typography } from "@mui/material";
 
 export default class App extends Component {
   static displayName = App.name;
 
   render() {
     return (
-      <Layout>
-        <Route exact path="/" component={Home} />
-        <Route path="/counter" component={Counter} />
-        <Route path="/fetch-data" component={FetchData} />
-      </Layout>
+      <div className="App">
+        <Typography variant="h1" component="h2">
+          Inside App Component
+        </Typography>
+        <Button variant="outlined">I am a button</Button>
+      </div>
     );
   }
 }
